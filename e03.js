@@ -1,12 +1,20 @@
 const http = require("http");
+const fs = require("fs");
 
 const createServer = (port) => {
   if (port) {
     const hostname = "localhost";
     const server = http.createServer(function (req, res) {
-      res.statusCode = 200;
-      res.setHeader("Content-Type", "text/html");
-      res.end("<h1>Hello World!</h1>");
+      fs.readFile("./index.html", null, (err, data) => {
+        if (err) {
+          res.writeHead(404);
+          res.write("File not found!");
+        } else {
+          res.writeHead(200, { "Content-Type": "text/html" });
+          res.write(data);
+        }
+        res.end();
+      });
     });
 
     server.listen(port, hostname, () => {
