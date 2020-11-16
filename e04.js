@@ -9,13 +9,13 @@ const createServer = (port) => {
       const queryObject = _url.parse(url, true).query;
       const { ...params } = queryObject;
       res.writeHead(200, { "Content-Type": "application/text" });
-      res.write("My request dump:\n");
-      res.write(`GET ${url}\n`);
-      res.write(`There are ${Object.keys(params).length} query parameters\n`);
+      console.log("My request dump:");
+      console.log(`GET ${url}`);
+      console.log(`There are ${Object.keys(params).length} query parameters`);
       for (const [key, value] of Object.entries(params)) {
-        res.write(`${key}: ${value}\n`);
+        console.log(`${key}: ${value}`);
       }
-      res.end();
+      res.end("done");
     });
 
     server.listen(port, hostname, () => {
