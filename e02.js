@@ -20,8 +20,6 @@ const createServer = (port) => {
     server.listen(port, hostname, () => {
       console.log("Server is running at port", port);
     });
-
-    server.close();
   } else {
     showError("usage: node e01.js <PORT>");
   }
